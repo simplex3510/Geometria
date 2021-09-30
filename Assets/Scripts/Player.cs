@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public Vector2 maxPower;
 
     Camera camera;
-    Vector2 force;
+    Vector2 moveDistance;
     Vector3 startPoint;
     Vector3 endPoint;
 
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         rigidbody2D.gravityScale = 0;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
@@ -45,14 +45,20 @@ public class Player : MonoBehaviour
             endPoint = camera.ScreenToWorldPoint(Input.mousePosition);
             endPoint.z = 15;
 
-            force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
-                                Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
-            rigidbody2D.AddForce(force * dragPower, ForceMode2D.Impulse);
+            moveDistance = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
+                                       Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
         }
+        transform.position = Vector3.Lerp(transform.position, startPoint-endPoint, 0.05f);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+
+        if (other.gameObject.tag == "Outside")
+        {
+
+        }
+
         Debug.Log("충돌");
         if (other.gameObject.tag == "Outside")
         {
@@ -65,15 +71,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    // private void OnMouseDown()
-    // {
-    //     Debug.Log("차징 시작");
-    //     isPressed = true;
-    // }
+    private void OnMouseDown()
+    {
+        Debug.Log("차징 시작");
+        isPressed = true;
+    }
 
-    // private void OnMouseUp()
-    // {
-    //     Debug.Log("이동 시작");
-    //     isPressed = false;
-    // }
+    private void OnMouseUp()
+    {
+        Debug.Log("이동 시작");
+        isPressed = false;
+    }
 }
