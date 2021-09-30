@@ -265,6 +265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  dragPower: 10
+  minPower: {x: -3, y: -3}
+  maxPower: {x: 3, y: 3}
 --- !u!61 &56999721
 BoxCollider2D:
   m_ObjectHideFlags: 0
