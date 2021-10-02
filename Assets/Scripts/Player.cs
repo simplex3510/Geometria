@@ -11,14 +11,11 @@ public class Player : MonoBehaviour
     public Vector2 maxPower;
 
     Camera camera;
-    Vector2 moveDistance;
+    Vector2 force;
     Vector3 startPoint;
     Vector3 endPoint;
 
     Rigidbody2D rigidbody2D;
-
-    bool isPressed = false;
-    // bool is
 
     private void Start()
     {
@@ -27,7 +24,7 @@ public class Player : MonoBehaviour
         rigidbody2D.gravityScale = 0;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
@@ -37,28 +34,20 @@ public class Player : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             startPoint = camera.ScreenToWorldPoint(Input.mousePosition);
-            startPoint.z = 15;
         }
 
         if(Input.GetMouseButtonUp(0))
         {
             endPoint = camera.ScreenToWorldPoint(Input.mousePosition);
-            endPoint.z = 15;
 
-            moveDistance = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
-                                       Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
+            force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
+                                Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
+            rigidbody2D.velocity = force * dragPower;
         }
-        transform.position = Vector3.Lerp(transform.position, startPoint-endPoint, 0.05f);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-
-        if (other.gameObject.tag == "Outside")
-        {
-
-        }
-
         Debug.Log("충돌");
         if (other.gameObject.tag == "Outside")
         {
@@ -69,17 +58,5 @@ public class Player : MonoBehaviour
         {
             Debug.Log("적");
         }
-    }
-
-    private void OnMouseDown()
-    {
-        Debug.Log("차징 시작");
-        isPressed = true;
-    }
-
-    private void OnMouseUp()
-    {
-        Debug.Log("이동 시작");
-        isPressed = false;
     }
 }
