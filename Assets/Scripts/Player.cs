@@ -6,22 +6,20 @@ public class Player : MonoBehaviour
 {
     public float moveSpeed;
     public float dragPower;
-
     public Vector2 minPower;
     public Vector2 maxPower;
 
-    Camera camera;
+    bool isBattle = false;
+    Camera playerCamera;
     Vector2 force;
     Vector3 startPoint;
     Vector3 endPoint;
-
-    Rigidbody2D rigidbody2D;
+    Rigidbody2D playerRigidbody2D;
 
     private void Start()
     {
-        camera = Camera.main;
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        rigidbody2D.gravityScale = 0;
+        playerCamera = Camera.main;
+        playerRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -31,32 +29,60 @@ public class Player : MonoBehaviour
             transform.Translate(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * moveSpeed * Time.deltaTime);
         }
 
-        if(Input.GetMouseButtonDown(0))
+        DragMove();
+
+        if (isBattle)
         {
-            startPoint = camera.ScreenToWorldPoint(Input.mousePosition);
+            Battle();
+        }
+    }
+
+    void DragMove()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            startPoint = playerCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            endPoint = camera.ScreenToWorldPoint(Input.mousePosition);
+            endPoint = playerCamera.ScreenToWorldPoint(Input.mousePosition);
 
             force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
                                 Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
-            rigidbody2D.velocity = force * dragPower;
+            playerRigidbody2D.velocity = force * dragPower;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("충돌");
-        if (other.gameObject.tag == "Outside")
-        {
-            Debug.Log("경계");
-        }
-
         if (other.gameObject.tag == "Enemy")
         {
-            Debug.Log("적");
+            isBattle = true;
+            PlayerCameraMove.isZoom = true;
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+
+        }
+    }
+
+    void Battle()
+    {
+        // Time.timeScale = 0f;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Destroy(enemy.gameObject);
+
+            PlayerCameraMove.isZoom = false;
+            Time.timeScale = 1;
+        }
+
+        isBattle = false;
     }
 }
