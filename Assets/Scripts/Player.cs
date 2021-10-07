@@ -30,11 +30,6 @@ public class Player : MonoBehaviour
         }
 
         DragMove();
-
-        if (isBattle)
-        {
-            Battle();
-        }
     }
 
     void DragMove()
@@ -60,29 +55,22 @@ public class Player : MonoBehaviour
         {
             isBattle = true;
             PlayerCameraMove.isZoom = true;
+
+            Vector2 oldVelocity = playerRigidbody2D.velocity;
+            playerRigidbody2D.velocity = Vector2.zero;
+            Battle(other);
+            playerRigidbody2D.velocity = oldVelocity;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    void Battle(Collision2D enemy)
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-
-        }
-    }
-
-    void Battle()
-    {
-        // Time.timeScale = 0f;
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // Destroy(enemy.gameObject);
-
-            PlayerCameraMove.isZoom = false;
-            Time.timeScale = 1;
-        }
-
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        Debug.Log("space bar");
+        Destroy(enemy.gameObject);
+        PlayerCameraMove.isZoom = false;
+        // }
         isBattle = false;
     }
 }
