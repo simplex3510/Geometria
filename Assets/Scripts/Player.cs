@@ -24,11 +24,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
-        {
-            transform.Translate(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * moveSpeed * Time.deltaTime);
-        }
-
         DragMove();
     }
 
@@ -58,19 +53,7 @@ public class Player : MonoBehaviour
 
             Vector2 oldVelocity = playerRigidbody2D.velocity;
             playerRigidbody2D.velocity = Vector2.zero;
-            Battle(other);
             playerRigidbody2D.velocity = oldVelocity;
         }
-    }
-
-    void Battle(Collision2D enemy)
-    {
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        Debug.Log("space bar");
-        Destroy(enemy.gameObject);
-        PlayerCameraMove.isZoom = false;
-        // }
-        isBattle = false;
     }
 }
