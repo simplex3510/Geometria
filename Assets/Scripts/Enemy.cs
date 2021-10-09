@@ -12,7 +12,12 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (player.gameObject.tag == "Player")
+
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
         {
             if (Input.GetKey(KeyCode.Space))
             {
@@ -21,10 +26,5 @@ public class Enemy : MonoBehaviour
                 PlayerCameraMove.isZoom = false;
             }
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D player)
-    {
-
     }
 }
