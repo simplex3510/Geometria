@@ -53,7 +53,8 @@ public class Player : MonoBehaviour
 
             Vector2 oldVelocity = playerRigidbody2D.velocity;
             playerRigidbody2D.velocity = Vector2.zero;
-            playerRigidbody2D.velocity = oldVelocity;
+
+            // playerRigidbody2D.velocity = oldVelocity;
         }
     }
 }
