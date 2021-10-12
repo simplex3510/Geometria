@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         DragMove();
+
+
     }
 
     void DragMove()
@@ -49,12 +51,6 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             isBattle = true;
-            PlayerCameraMove.isZoom = true;
-
-            Vector2 oldVelocity = playerRigidbody2D.velocity;
-            playerRigidbody2D.velocity = Vector2.zero;
-
-            // playerRigidbody2D.velocity = oldVelocity;
         }
     }
 }

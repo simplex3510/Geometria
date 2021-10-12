@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public Rigidbody2D playerRigidbody2D;
+
     bool isBattle = false;
+
 
 
     private void Update()
     {
+        if (isBattle)
+        {
+            Vector2 oldVelocity = playerRigidbody2D.velocity;
+            playerRigidbody2D.velocity = Vector2.zero;
 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Destroy(gameObject);
+                playerRigidbody2D.velocity = oldVelocity;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -24,13 +37,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Debug.Log("space bar");
-                Destroy(gameObject);
-                PlayerCameraMove.isZoom = false;
-
-            }
+            isBattle = true;
         }
     }
 }
