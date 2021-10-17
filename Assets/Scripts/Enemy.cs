@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Rigidbody2D playerRigidbody2D;
+    Vector2 oldVelocity;
 
     bool isBattle = false;
 
@@ -14,30 +15,30 @@ public class Enemy : MonoBehaviour
     {
         if (isBattle)
         {
-            Vector2 oldVelocity = playerRigidbody2D.velocity;
+            oldVelocity = playerRigidbody2D.velocity;
             playerRigidbody2D.velocity = Vector2.zero;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Destroy(gameObject);
+                GameObject.Destroy(this.gameObject);
                 playerRigidbody2D.velocity = oldVelocity;
             }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
             isBattle = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            isBattle = false;
         }
     }
 }

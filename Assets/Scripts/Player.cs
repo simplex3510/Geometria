@@ -5,13 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float moveSpeed;
-    public float dragPower;
-    public Vector2 minPower;
-    public Vector2 maxPower;
 
-    bool isBattle = false;
     Camera playerCamera;
-    Vector2 force;
+    Vector2 minDistance = new Vector2(-3, -3);
+    Vector2 maxDistance = new Vector2(3, 3);
+    Vector2 direction;
     Vector3 startPoint;
     Vector3 endPoint;
     Rigidbody2D playerRigidbody2D;
@@ -24,13 +22,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        DragMove();
-
-
-    }
-
-    void DragMove()
-    {
+        #region DragMove
         if (Input.GetMouseButtonDown(0))
         {
             startPoint = playerCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -40,17 +32,17 @@ public class Player : MonoBehaviour
         {
             endPoint = playerCamera.ScreenToWorldPoint(Input.mousePosition);
 
-            force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
-                                Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
-            playerRigidbody2D.velocity = force * dragPower;
+            direction = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minDistance.x, maxDistance.x),
+                                    Mathf.Clamp(startPoint.y - endPoint.y, minDistance.y, maxDistance.y));
+            Debug.Log(direction.ToString());
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            isBattle = true;
-        }
+        Vector2 position = playerRigidbody2D.position;
+        playerRigidbody2D.MovePosition(position + direction);
+
+        
+
+        #endregion
+    
     }
 }

@@ -412,7 +412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846184667465176633, guid: cae81028e604c6a4c9066cf556480fc7, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5846184667465176634, guid: cae81028e604c6a4c9066cf556480fc7, type: 3}
       propertyPath: m_Name
@@ -564,7 +564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846184667465176633, guid: cae81028e604c6a4c9066cf556480fc7, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5846184667465176634, guid: cae81028e604c6a4c9066cf556480fc7, type: 3}
       propertyPath: m_Name
@@ -1098,7 +1098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846184667465176633, guid: cae81028e604c6a4c9066cf556480fc7, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5846184667465176634, guid: cae81028e604c6a4c9066cf556480fc7, type: 3}
       propertyPath: m_Name
@@ -1603,7 +1603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846184667465176633, guid: cae81028e604c6a4c9066cf556480fc7, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5846184667465176634, guid: cae81028e604c6a4c9066cf556480fc7, type: 3}
       propertyPath: m_Name
@@ -1626,6 +1626,18 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 0c8d1d322d6be2a40915c41fc0ea6848, type: 2}
+    - target: {fileID: 6366554804040525832, guid: 8abe0e89995d1a94988300c5f2722f5e, type: 3}
+      propertyPath: m_LinearDrag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366554804040525836, guid: 8abe0e89995d1a94988300c5f2722f5e, type: 3}
+      propertyPath: dragPower
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366554804040525836, guid: 8abe0e89995d1a94988300c5f2722f5e, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6366554804040525837, guid: 8abe0e89995d1a94988300c5f2722f5e, type: 3}
       propertyPath: m_Material
       value: 
