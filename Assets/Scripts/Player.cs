@@ -7,12 +7,13 @@ public class Player : MonoBehaviour
     public float moveSpeed;
 
     Camera playerCamera;
-    Vector2 minDistance = new Vector2(-1, -1);
-    Vector2 maxDistance = new Vector2(1, 1);
-    Vector2 direction;
+    Rigidbody2D playerRigidbody2D;
+    Vector2 minDistance = new Vector2(-5, -5);
+    Vector2 maxDistance = new Vector2(5, 5);
+    Vector3 direction;
     Vector3 startPoint;
     Vector3 endPoint;
-    Rigidbody2D playerRigidbody2D;
+    
 
     private void Start()
     {
@@ -26,23 +27,25 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             startPoint = playerCamera.ScreenToWorldPoint(Input.mousePosition);
+            startPoint.z = 0;
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             endPoint = playerCamera.ScreenToWorldPoint(Input.mousePosition);
+            endPoint.z = 0;
 
             direction = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minDistance.x, maxDistance.x),
                                     Mathf.Clamp(startPoint.y - endPoint.y, minDistance.y, maxDistance.y));
-            direction = direction.normalized;
+
+            
             Debug.Log(direction.ToString());
         }
 
-        Vector2 position = playerRigidbody2D.position;
-        //playerRigidbody2D.MovePosition(position + direction * moveSpeed * Time.deltaTime);
+        playerRigidbody2D.velocity = direction * moveSpeed * Time.deltaTime;
 
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
+
         #endregion
-    
+
     }
 }
