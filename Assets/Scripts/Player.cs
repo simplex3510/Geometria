@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
             Debug.Log(direction.ToString());
         }
 
-        playerRigidbody2D.velocity = direction * moveSpeed * Time.deltaTime;
+        playerRigidbody2D.velocity = direction * moveSpeed;
 
 
         #endregion
