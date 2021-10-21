@@ -9,8 +9,6 @@ public class Enemy : MonoBehaviour
 
     bool isBattle = false;
 
-
-
     private void Update()
     {
         if (isBattle)
@@ -22,6 +20,7 @@ public class Enemy : MonoBehaviour
             {
                 GameObject.Destroy(this.gameObject);
                 playerRigidbody2D.velocity = oldVelocity;
+                PlayerCameraMove.isZoom = false;
             }
         }
     }

@@ -4,28 +4,25 @@ using UnityEngine;
 
 public class PlayerCameraMove : MonoBehaviour
 {
+    public Transform player;
+
+    float offset = -10f;
     float zoomIn = 10f;
     float zoomOut = 13f;
     float zoomPower = 0.1f;
-    public static bool isZoom
-    {
-        get;
-        set;
-    }
-
-    Transform playerPosition;
+    public static bool isZoom;
+    
     Camera mainCamera;
 
     private void Start()
     {
         isZoom = false;
-        playerPosition = GetComponent<Transform>();
         mainCamera = Camera.main;
     }
 
     private void Update()
     {
-        mainCamera.transform.position = new Vector3(playerPosition.position.x, playerPosition.position.y, -10f);
+        mainCamera.transform.position = new Vector3(player.position.x, player.position.y, offset);
     }
 
     private void LateUpdate()
@@ -40,7 +37,7 @@ public class PlayerCameraMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
@@ -48,7 +45,7 @@ public class PlayerCameraMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    private void OnTriggerExit2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {

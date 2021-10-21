@@ -125,7 +125,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 5
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -146,9 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  dragPower: 20
-  minPower: {x: -3, y: -3}
-  maxPower: {x: 3, y: 3}
 --- !u!114 &6366554804040525833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,3 +158,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88cdb2f28d4cc2a458dd58257a3974e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 6366554804040525839}
